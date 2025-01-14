@@ -17,15 +17,18 @@ class WebhookController {
   // Verify Webhook
   verifyWebhook(req, res) {
     console.log('Verify Webhook called...');
-    const mode = req.query['hub.mode'];
-    const challenge = req.query['hub.challenge'];
-    const verifyToken = req.query['hub.verify_token'];
+    console.log('SECRET_TOKEN = '+this.myVerifyToken);
 
-    if (mode === 'subscribe' && verifyToken === this.myVerifyToken) {
-      res.status(200).send(challenge);
-    } else {
-      res.status(403).send('Forbidden');
-    }
+          res.status(200).send("token is ="+this.myVerifyToken);
+    // const mode = req.query['hub.mode'];
+    // const challenge = req.query['hub.challenge'];
+    // const verifyToken = req.query['hub.verify_token'];
+
+    // if (mode === 'subscribe' && verifyToken === this.myVerifyToken) {
+    //   res.status(200).send(challenge);
+    // } else {
+    //   res.status(403).send('Forbidden');
+    // }
   }
 
   // Handle incoming messages
