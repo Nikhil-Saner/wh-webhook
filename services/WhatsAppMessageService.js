@@ -94,6 +94,31 @@ class WhatsAppMessageService {
         throw new Error(`Error sending simple template message: ${JSON.stringify(error.response?.data || error.message, null, 2)}`);
       });
   }
+
+
+
+  async markMessageAsRead(messageId) {
+    const headers = {
+      Authorization: `Bearer ${this.apiToken}`,
+      'Content-Type': 'application/json',
+    };
+
+    const body = {
+      messaging_product: 'whatsapp',
+      status: 'read',
+      message_id: messageId,
+    };
+
+    try {
+      const response = await axios.post(this.apiUrl, body, { headers });
+      console.log(`Message ${messageId} marked as read:`, response.data);
+    } catch (error) {
+      console.error(`Error marking message ${messageId} as read:`, error.response?.data || error.message);
+    }
+  }
+
+
+
 }
 
 module.exports = WhatsAppMessageService;
